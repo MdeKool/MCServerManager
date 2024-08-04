@@ -1,0 +1,31 @@
+{% from "macros/server_instance_macro.html" import server_instance %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}{% endblock %}
+    {% block styling %}
+        <link rel="stylesheet" href="/styling/index.css">
+    {% endblock %}
+    {% block scripts %}
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="/js/main.js" defer></script>
+    {% endblock %}
+    {% block title %}<title>Title</title>{% endblock %}
+</head>
+<body>
+    {% block header %}{% endblock %}
+    {% block main %}
+        <div id="new-instance-wrapper">
+            <button id="show-popup-btn">Create new instance</button>
+        </div>
+        <div class="instances">
+            {% for inst in instances %}
+                {{ server_instance(inst) }}
+            {% endfor %}
+        </div>
+    {% endblock %}
+    {% block footer %}{% endblock %}
+</body>
+</html>

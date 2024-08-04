@@ -1,0 +1,117 @@
+body {
+    background: lightgrey;
+}
+
+.instance {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.status {
+    width: 50px;
+}
+
+.instance-name {
+}
+
+.instance-btn {
+    align-self: center;
+    height: 32px;
+    width: 70px;
+    margin: 0 5px 0 5px ;
+}
+
+#new-instance-wrapper {
+    display: flex;
+    margin-left: 50px;
+    padding: 6px;
+}
+
+#show-popup-btn {
+    height: 32px;
+    width: 150px;
+}
+
+.blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(1px);
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 500;
+}
+
+.blur.visible {
+    opacity: 1;
+}
+
+#container {
+    position: fixed;
+    top: 10%;
+    left: 40%;
+    min-height: 250px;
+    max-height: 300px;
+    height: 40%;
+    min-width: 400px;
+    max-width: 600px;
+    width: 30%;
+    background: antiquewhite;
+    border-radius: 8px;
+    outline: black solid 1px;
+    padding: 20px;
+}
+
+#container p {
+    margin-top: 8px;
+    margin-bottom: 1em;
+}
+
+#container #example-link {
+    text-align: right;
+    width: 100%;
+    margin-top: 0;
+    font-size: 11px;
+}
+
+.instance-input-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.instance-input-field label {
+    width: 15%;
+    margin-right: 10px;
+}
+
+.instance-input-field input {
+    width: 85%;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    height: 22px;
+}
+
+.instance-input-field.version {
+    margin-bottom: 0.5rem;
+}
+
+.instance-input-field.version label {
+    width: 20%;
+}
+
+.instance-input-field.version select {
+    font-family: "JetBrains Mono", monospace;
+    width: 18%;
+}
+
+.new-instance-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

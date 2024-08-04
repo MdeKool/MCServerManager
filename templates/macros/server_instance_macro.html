@@ -1,0 +1,13 @@
+{# inst_details
+[0]: instance name
+[1]: Online/Offline status
+[2]: Server port - if [1] is True (online)
+#}
+{% macro server_instance(inst_details) %}
+<div class="instance" data-port={{ inst_details[2] if inst_details[1] else "" }}>
+    <p class="status">{{ "Online" if inst_details[1] else "Offline" }}</p>
+    <button class="instance-btn on">Turn on</button>
+    <button class="instance-btn off">Turn off</button>
+    <p class="instance-name">{{ inst_details[0] }} {{ " - port: " + inst_details[2] if inst_details[1] }}</p>
+</div>
+{% endmacro %}
