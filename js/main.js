@@ -140,7 +140,7 @@ function addButtonListeners(modalDoc, blur) {
         console.log("Creating new instance");
 
         const instanceName = document.getElementById("instance-name").value;
-        const modpack = document.getElementById("modpack").value;
+        const modpackId = document.getElementById("modpack-id").value;
         const modloader = document.getElementById("modloader").value;
         const version = document.getElementById("version").value;
 
@@ -154,7 +154,7 @@ function addButtonListeners(modalDoc, blur) {
                     name: instanceName,
                     loader: modloader,
                     version: version,
-                    modpack: modpack
+                    modpack_id: modpackId
                 })
             })
     });
