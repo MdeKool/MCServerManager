@@ -54,7 +54,7 @@ body {
     position: fixed;
     top: 10%;
     left: 40%;
-    min-height: 250px;
+    min-height: auto;
     max-height: 70%;
     height: auto;
     min-width: 400px;
@@ -64,6 +64,7 @@ body {
     border-radius: 8px;
     outline: black solid 1px;
     padding: 20px;
+    overflow: auto;
 }
 
 #container p {
