@@ -171,12 +171,13 @@ function addButtonListeners(modalDoc, blur) {
 function failedDownloadList(failList) {
     const modList = document.createElement("div");
     modList.id = "mod-list";
+    modList.innerHTML = "Missing mods<br>";
     failList.forEach(mod => {
         const modName = mod[0]
         const modLink = mod[1]
         const modDiv = document.createElement("div");
         modDiv.className = "failed-mod"
-        modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\">" + modLink + "</a>";
+        modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\">Link</a>";
         modList.appendChild(modDiv);
     });
     return modList;
