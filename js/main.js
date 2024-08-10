@@ -129,7 +129,6 @@ function addLoaderChangeListener(loaderSelect, versionSelect, loaders) {
 }
 
 function addButtonListeners(modalDoc, blur) {
-    const btns = modalDoc.getElementsByClassName("new-instance-btns")[0];
     const cancelBtn = modalDoc.getElementById("new-instance-cancel");
     cancelBtn.addEventListener("click", () => {
         blur.classList.remove("visible");
@@ -161,7 +160,9 @@ function addButtonListeners(modalDoc, blur) {
                 let remainingMods = data["remaining_mods"]
                 if (remainingMods) {
                     const failDiv = failedDownloadList(remainingMods);
-                    document.insertBefore(failDiv, btns);
+                    const container = document.getElementById("container");
+                    const btns = document.getElementsByClassName("new-instance-btns")[0];
+                    container.insertBefore(failDiv, btns);
                 }
             })
     });
