@@ -129,6 +129,7 @@ function addLoaderChangeListener(loaderSelect, versionSelect, loaders) {
 }
 
 function addButtonListeners(modalDoc, blur) {
+    const btns = modalDoc.getElementsByClassName("new-instance-btns")[0];
     const cancelBtn = modalDoc.getElementById("new-instance-cancel");
     cancelBtn.addEventListener("click", () => {
         blur.classList.remove("visible");
@@ -136,7 +137,6 @@ function addButtonListeners(modalDoc, blur) {
     });
 
     const createBtn = modalDoc.getElementById("new-instance-create");
-    const container = modalDoc.getElementById("container");
     createBtn.addEventListener("click", () => {
         const instanceName = document.getElementById("instance-name").value;
         const modpackId = document.getElementById("modpack-id").value;
@@ -161,9 +161,7 @@ function addButtonListeners(modalDoc, blur) {
                 let remainingMods = data["remaining_mods"]
                 if (remainingMods) {
                     const failDiv = failedDownloadList(remainingMods);
-                    console.log(container)
-                    console.log(container.lastChild);
-                    container.insertBefore(failDiv, container.lastChild);
+                    document.insertBefore(failDiv, btns);
                 }
             })
     });
@@ -173,7 +171,6 @@ function failedDownloadList(failList) {
     const modList = document.createElement("div");
     modList.id = "mod-list";
     failList.forEach(mod => {
-        console.log(mod);
         const modName = mod[0]
         const modLink = mod[1]
         const modDiv = document.createElement("div");
