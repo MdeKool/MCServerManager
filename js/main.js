@@ -57,7 +57,7 @@ function showNewInstanceModal() {
         .then(response => response.json())
         .then(dict => {
             const modalDoc = parseModalText(dict["modal"]);
-            const modal = modalDoc.firstChild;
+            const modal = modalDoc.getElementById("container");
             const loaderSelect = modalDoc.getElementById("modloader");
             const loaders = dict["loaders"];
 
