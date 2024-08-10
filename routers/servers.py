@@ -22,4 +22,6 @@ async def server_off(request: Request):
 @router.post("/new")
 async def server_new(request: Request):
     data = await request.json()
-    return util.create_instance(**data)
+    return {
+        "remaining_mods": util.create_instance(**data)
+    }
