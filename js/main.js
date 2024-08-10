@@ -177,6 +177,7 @@ function failedDownloadList(failList) {
         const modDiv = document.createElement("div");
         modDiv.className = "failed-mod"
         modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\">" + modLink + "</a>";
+        modList.appendChild(modDiv);
     });
     return modList;
 }
