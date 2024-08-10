@@ -22,5 +22,4 @@ async def server_off(request: Request):
 @router.post("/new")
 async def server_new(request: Request):
     data = await request.json()
-    util.create_instance(**data)
-    return None
+    return util.create_instance(**data)
