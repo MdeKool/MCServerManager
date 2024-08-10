@@ -159,13 +159,15 @@ function addButtonListeners(modalDoc, blur) {
             .then(data => {
                 let remainingMods = data["remaining_mods"]
                 if (remainingMods) {
-                    showFailed(remainingMods);
+                    const failDiv = failedDownloadList(remainingMods);
+                    const container = modalDoc.getElementById("container");
+                    container.insertBefore(failDiv, container.lastChild);
                 }
             })
     });
 }
 
-function showFailed(failList) {
+function failedDownloadList(failList) {
     const modList = document.createElement("div");
     modList.id = "mod-list";
     failList.forEach(mod => {
@@ -175,7 +177,7 @@ function showFailed(failList) {
         const modDiv = document.createElement("div");
         modDiv.className = "failed-mod"
         modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\">" + modLink + "</a>";
-        console.log(modDiv);
     });
+    return modList;
 }
 
