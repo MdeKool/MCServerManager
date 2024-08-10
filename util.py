@@ -1,4 +1,12 @@
+import json
+import os
 import subprocess
+from dotenv import load_dotenv
+
+import httpx
+
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
 
 def get_instances():
@@ -74,12 +82,58 @@ def get_loaders():
     }
 
 
-def create_instance(name, loader, version, modpack):
+def create_instance(name, loader, version, modpack_id):
+    class CustomAuth(httpx.Auth):
+        def __init__(self, token):
+            self.token = token
+
+        def auth_flow(self, request: httpx.Request):
+            request.headers['x-api-key'] = self.token
+            yield request
+
+    def download_main_file(pack_id):
+        client = httpx.Client(auth=auth)
+
+        response = client.get(base_url + f"/v1/mods/{pack_id}").json()
+        pack_latest_release_id = response["data"]["mainFileId"]
+        pack_latest_release_url = client.get(base_url + f"/v1/mods/{pack_id}/files/{pack_latest_release_id}/download-url").json()["data"]
+        download_cmd = f"mkdir ~/.temp && cd ~/.temp && wget --header=x-api-key: {auth.token} {pack_latest_release_url}"
+        subprocess.run(download_cmd, shell=True)
+        subprocess.run("cd ~/.temp && unzip *.zip && rm *.zip", shell=True)
+
+    def get_mods_from_manifest():
+        f_manifest_path = os.path.expanduser("~/.temp/manifest.json")
+        with open(f_manifest_path, 'r') as f_manifest:
+            manifest = json.load(f_manifest)
+        mods = []
+        for file in manifest["files"]:
+            mods.append((file["projectID"], file["fileID"]))
+        return mods
+
+    def download_mods(mods):
+        client = httpx.Client(auth=auth)
+        fails = []
+        for (mod_project_id, mod_file_id) in mods:
+            mod_dl_link_get = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}/download-url")
+            if mod_dl_link_get.status_code != 200:
+                fail = client.get(base_url + f"/v1/mods/{mod_project_id}").json()["data"]
+                mod_name = fail["name"]
+                mod_link = fail["links"]["websiteUrl"]
+                print(f"Failed to download: {mod_name} - {mod_link}")
+                fails.append((mod_name, mod_link))
+
+        return fails
+
     print("New pack name:", name)
     print("New pack loader:", loader)
     print("New pack version:", version)
-    print("New pack download url:", modpack)
+    print("New pack ID:", modpack_id)
 
-    new_dir_cmd = f""
+    # API access
+    base_url = "https://api.curseforge.com"
+    auth = CustomAuth(API_KEY)
 
-    return None
+    download_main_file(modpack_id)
+    mod_ids = get_mods_from_manifest()
+    failed_downloads = download_mods(mod_ids)
+    return failed_downloads
