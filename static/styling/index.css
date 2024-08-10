@@ -110,6 +110,13 @@ body {
     width: 18%;
 }
 
+#mod-list {
+    margin-bottom: 1em;
+}
+#mod-list div {
+    font-size: 14px;
+}
+
 .new-instance-btns {
     display: flex;
     justify-content: space-between;
