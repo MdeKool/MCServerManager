@@ -137,8 +137,6 @@ function addButtonListeners(modalDoc, blur) {
 
     const createBtn = modalDoc.getElementById("new-instance-create");
     createBtn.addEventListener("click", () => {
-        console.log("Creating new instance");
-
         const instanceName = document.getElementById("instance-name").value;
         const modpackId = document.getElementById("modpack-id").value;
         const modloader = document.getElementById("modloader").value;
@@ -157,5 +155,27 @@ function addButtonListeners(modalDoc, blur) {
                     modpack_id: modpackId
                 })
             })
+            .then(response => response.json())
+            .then(data => {
+                let remainingMods = data["remaining_mods"]
+                if (remainingMods) {
+                    showFailed(remainingMods);
+                }
+            })
     });
 }
+
+function showFailed(failList) {
+    const modList = document.createElement("div");
+    modList.id = "mod-list";
+    failList.forEach(mod => {
+        console.log(mod);
+        const modName = mod[0]
+        const modLink = mod[1]
+        const modDiv = document.createElement("div");
+        modDiv.className = "failed-mod"
+        modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\">" + modLink + "</a>";
+        console.log(modDiv);
+    });
+}
+
