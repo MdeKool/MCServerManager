@@ -198,10 +198,9 @@ function failedDownloadList(failList) {
 
 function uploadBox() {
     const uploadDiv = document.createElement("div");
-    // const upload = document.createElement("form")
+    uploadDiv.innerHTML = "<p>Please upload a zip with the missing mods</p>"
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
-    // upload.appendChild(uploadInput);
     uploadDiv.appendChild(uploadInput);
     return uploadDiv;
 }
