@@ -198,10 +198,11 @@ function failedDownloadList(failList) {
 
 function uploadBox() {
     const uploadDiv = document.createElement("div");
-    uploadDiv.id = "file-upload";
+    uploadDiv.id = "file-upload-div";
     uploadDiv.innerHTML = "<p>Please upload a <span style='font-family: \"JetBrains Mono\", monospace'>missing.zip</span> with the missing mods</p>";
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
+    uploadInput.id = "file-upload"
     uploadDiv.appendChild(uploadInput);
     uploadInput.addEventListener("onchange", event => handleFileUpload("FILE CHANGED: " + event.target.value));
     return uploadDiv;
