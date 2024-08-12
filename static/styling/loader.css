@@ -8,7 +8,6 @@
   outline: 3px solid #474847;
   outline-offset: -1px;
   animation: l3-0 4s linear infinite;
-
 }
 .loader:before,
 .loader:after {
