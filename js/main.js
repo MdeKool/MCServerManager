@@ -142,6 +142,11 @@ function addButtonListeners(modalDoc, blur) {
         const modloader = document.getElementById("modloader").value;
         const version = document.getElementById("version").value;
 
+        const container = document.getElementById("container");
+        const btns = document.getElementsByClassName("new-instance-btns")[0];
+        const loader = createLoader();
+        container.insertBefore(loader, btns);
+
         fetch("/servers/new",
             {
                 method: "POST",
@@ -155,13 +160,14 @@ function addButtonListeners(modalDoc, blur) {
                     modpack_id: modpackId
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                loader.remove();
+                return response.json();
+            })
             .then(data => {
                 let remainingMods = data["remaining_mods"]
                 if (remainingMods) {
                     const failDiv = failedDownloadList(remainingMods);
-                    const container = document.getElementById("container");
-                    const btns = document.getElementsByClassName("new-instance-btns")[0];
                     container.insertBefore(failDiv, btns);
                 }
             })
@@ -188,3 +194,8 @@ function failedDownloadList(failList) {
     return modList;
 }
 
+function createLoader() {
+    const loader = document.createElement("div");
+    loader.className = "loader";
+    return loader;
+}
