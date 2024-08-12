@@ -181,7 +181,7 @@ function failedDownloadList(failList) {
     if (modList = document.getElementById("mod-list")) {  // If mod-list already exists use it, otherwise create new div.
         modList.innerHTML = '';
     } else {
-        modList = document.createElement("mod-list")
+        modList = document.createElement("div");
         modList.id = "mod-list";
     }
     modList.innerHTML = "Missing mods<br>";
@@ -198,7 +198,7 @@ function failedDownloadList(failList) {
 
 function uploadBox() {
     const uploadDiv = document.createElement("div");
-    uploadDiv.innerHTML = "<p>Please upload a <span style='font-family: 'JetBrains Mono', monospace'>missing.zip</span> with the missing mods</p>"
+    uploadDiv.innerHTML = "<p>Please upload a <span style='font-family: \'JetBrains Mono\', monospace'>missing.zip</span> with the missing mods</p>"
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
     uploadDiv.appendChild(uploadInput);
