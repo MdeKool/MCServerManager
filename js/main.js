@@ -202,8 +202,8 @@ function uploadBox() {
     uploadDiv.innerHTML = "<p>Please upload a <span style='font-family: \"JetBrains Mono\", monospace'>missing.zip</span> with the missing mods</p>";
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
-    uploadInput.addEventListener("onchange", event => handleFileUpload("FILE CHANGED: " + event.target.value));
     uploadDiv.appendChild(uploadInput);
+    uploadInput.addEventListener("onchange", event => handleFileUpload("FILE CHANGED: " + event.target.value));
     return uploadDiv;
 }
 
