@@ -2,11 +2,12 @@
 .loader {
   display: inline-grid;
   width: 16px;
+  position: fixed;
   right: 0;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  outline: 7px solid #474847;
+  outline: 3px solid #474847;
   outline-offset: -1px;
   animation: l3-0 4s linear infinite;
 
