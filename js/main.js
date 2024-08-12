@@ -168,7 +168,9 @@ function addButtonListeners(modalDoc, blur) {
                 let remainingMods = data["remaining_mods"]
                 if (remainingMods) {
                     const failDiv = failedDownloadList(remainingMods);
+                    const upload = uploadBox();
                     container.insertBefore(failDiv, btns);
+                    container.insertBefore(upload, btns);
                 }
             })
     });
@@ -192,6 +194,16 @@ function failedDownloadList(failList) {
         modList.appendChild(modDiv);
     });
     return modList;
+}
+
+function uploadBox() {
+    const uploadDiv = document.createElement("div");
+    // const upload = document.createElement("form")
+    const uploadInput = document.createElement("input");
+    uploadInput.type = "file";
+    // upload.appendChild(uploadInput);
+    uploadDiv.appendChild(uploadInput);
+    return uploadDiv;
 }
 
 function createLoader() {
