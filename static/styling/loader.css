@@ -2,8 +2,6 @@
 .loader {
   display: inline-grid;
   width: 20px;
-  position: relative;
-  right: 0;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
