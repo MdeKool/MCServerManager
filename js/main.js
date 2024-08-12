@@ -198,7 +198,7 @@ function failedDownloadList(failList) {
 
 function uploadBox() {
     const uploadDiv = document.createElement("div");
-    uploadDiv.innerHTML = "<p>Please upload a zip with the missing mods</p>"
+    uploadDiv.innerHTML = "<p>Please upload a <span style='font-family: 'JetBrains Mono', monospace'>missing.zip</span> with the missing mods</p>"
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
     uploadDiv.appendChild(uploadInput);
