@@ -1,7 +1,8 @@
 /* HTML: <div class="loader"></div> */
 .loader {
   display: inline-grid;
-  width: 80px;
+  width: 16px;
+  right: 0;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
