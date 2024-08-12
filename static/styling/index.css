@@ -120,6 +120,10 @@ body {
     font-size: 14px;
 }
 
+#file-upload {
+    margin-bottom: 0.5em;
+}
+
 .new-instance-btns {
     display: flex;
     justify-content: space-between;
