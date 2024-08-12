@@ -112,6 +112,8 @@ body {
 }
 
 #mod-list {
+    max-height: 8em;
+    overflow: auto;
     margin-bottom: 1em;
 }
 #mod-list div {
