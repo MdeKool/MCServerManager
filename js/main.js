@@ -169,15 +169,20 @@ function addButtonListeners(modalDoc, blur) {
 }
 
 function failedDownloadList(failList) {
-    const modList = document.createElement("div");
-    modList.id = "mod-list";
+    let modList;
+    if (modList = document.getElementById("mod-list")) {  // If mod-list already exists use it, otherwise create new div.
+        modList.innerHTML = '';
+    } else {
+        modList = document.createElement("mod-list")
+        modList.id = "mod-list";
+    }
     modList.innerHTML = "Missing mods<br>";
     failList.forEach(mod => {
         const modName = mod[0]
         const modLink = mod[1]
         const modDiv = document.createElement("div");
         modDiv.className = "failed-mod"
-        modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\">Link</a>";
+        modDiv.innerHTML = modName + " - <a href=\"" + modLink + "\" target='_blank'>Link</a>";
         modList.appendChild(modDiv);
     });
     return modList;
