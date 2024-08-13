@@ -207,19 +207,19 @@ function uploadBox() {
     uploadForm.appendChild(uploadInput);
     uploadDiv.appendChild(uploadForm);
     uploadInput.addEventListener("change", event => {
-        event.preventDefault();
-        uploadForm.submit();
+        // event.preventDefault();
+        uploadFile(new FormData(uploadForm));
     });
-    uploadForm.addEventListener("submit", event => {
-        const file = new FormData(uploadForm);
-        handleFileUpload(file)
-
-        event.preventDefault();
-    })
+    // uploadForm.addEventListener("submit", event => {
+    //     const file = new FormData(uploadForm);
+    //     handleFileUpload(file)
+    //
+    //     event.preventDefault();
+    // })
     return uploadDiv;
 }
 
-function handleFileUpload(file) {
+function uploadFile(file) {
     fetch("/upload",
         {
             method: "POST",
