@@ -9,4 +9,4 @@ def make_dir(dir_name):
 
 
 def check_files(directory, pattern):
-    os.listdir(directory)
+    print(os.listdir(directory))
