@@ -207,19 +207,15 @@ function uploadBox() {
     uploadForm.appendChild(uploadInput);
     uploadDiv.appendChild(uploadForm);
     uploadInput.addEventListener("change", event => {
-        // event.preventDefault();
         uploadFile(new FormData(uploadForm));
     });
-    // uploadForm.addEventListener("submit", event => {
-    //     const file = new FormData(uploadForm);
-    //     handleFileUpload(file)
-    //
-    //     event.preventDefault();
-    // })
     return uploadDiv;
 }
 
 function uploadFile(file) {
+    for (const pair of file.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+    }
     fetch("/upload/",
         {
             method: "POST",
@@ -228,8 +224,16 @@ function uploadFile(file) {
             },
             body: file,
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => console.log("Uploaded form successfully"))
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        });
 }
 
 function createLoader() {
