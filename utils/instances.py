@@ -127,7 +127,7 @@ def create_instance(name, loader, version, modpack_id):
                     fails.append((mod_name, mod_link))
                     continue
                 url_list.append(mod_dl_link_get.json()["data"])
-            urls.writelines(url_list)
+            urls.write("\n".join(url_list))
             subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} -i {mods_dir}/urls.txt", shell=True)
         return fails
 
