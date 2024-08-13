@@ -1,4 +1,5 @@
 import os
+import re
 from zipfile import ZipFile
 
 
@@ -11,4 +12,4 @@ def make_dir(dir_name):
 
 
 def check_zip_file(file_location, pattern):
-    print(ZipFile(file_location).namelist())
+    return all(re.match(pattern, name) for name in ZipFile(file_location).namelist())
