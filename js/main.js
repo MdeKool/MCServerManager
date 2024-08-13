@@ -200,16 +200,33 @@ function uploadBox() {
     const uploadDiv = document.createElement("div");
     uploadDiv.id = "file-upload-div";
     uploadDiv.innerHTML = "<p>Please upload a <span style='font-family: \"JetBrains Mono\", monospace'>missing.zip</span> with the missing mods</p>";
+    const uploadForm = document.createElement("form");
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
     uploadInput.id = "file-upload"
-    uploadDiv.appendChild(uploadInput);
-    uploadInput.addEventListener("change", event => handleFileUpload("FILE CHANGED: " + event.target.value));
+    uploadForm.appendChild(uploadInput);
+    uploadDiv.appendChild(uploadForm);
+    uploadInput.addEventListener("change", event => uploadForm.submit());
+    uploadForm.addEventListener("submit", event => {
+        const file = new FormData(uploadForm);
+        handleFileUpload(file)
+
+        event.preventDefault();
+    })
     return uploadDiv;
 }
 
 function handleFileUpload(file) {
-    console.log(file);
+    fetch("/upload",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/zip"
+            },
+            body: file,
+        })
+        .then(response => response.json())
+        .then(data => console.log("Uploaded form successfully"))
 }
 
 function createLoader() {
