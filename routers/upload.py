@@ -1,6 +1,8 @@
+import os
+
 from fastapi import APIRouter, Request, File, UploadFile, HTTPException
 
-from utils import files
+from utils import files, instances
 
 router = APIRouter(prefix="/upload")
 
@@ -13,6 +15,9 @@ async def file_upload(file: UploadFile = File(...)):
         f.write(contents)
     if not files.check_zip_file(f"{dir_path}/{file.filename}", "^.*.jar"):
         return HTTPException(400, "All files in zip must be *.jar files")
+    files.unzip(f"{dir_path}/{file.filename}", location=f"{dir_path}")
+    os.remove(f"{dir_path}/{file.filename}")
+    instances.fill_missing(".temp/")
     return {
         "filename": file.filename
     }

@@ -145,3 +145,7 @@ def create_instance(name, loader, version, modpack_id):
     mod_ids = get_mods_from_manifest()
     failed_downloads = download_mods(mod_ids)
     return failed_downloads
+
+
+def fill_missing(path):
+    return subprocess.run(f"cp ~/{path}/missing_mods/* ~/{path}/mods", shell=True)

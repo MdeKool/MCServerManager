@@ -10,5 +10,9 @@ def make_dir(dir_name):
     return save_dir
 
 
-def check_zip_file(file_location, pattern):
-    return all(re.match(pattern, name) for name in ZipFile(file_location).namelist())
+def check_zip_file(filepath, pattern):
+    return all(re.match(pattern, name) for name in ZipFile(filepath).namelist())
+
+
+def unzip(filepath, location=None):
+    return ZipFile(filepath).extractall(location)
