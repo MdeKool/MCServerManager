@@ -11,7 +11,7 @@ async def file_upload(file: UploadFile = File(...)):
     contents = await file.read()
     with open(f"{dir_path}/{file.filename}", "wb") as f:
         f.write(contents)
-    files.check_files()
+    files.check_files(dir_path, "^.*.jar")
     return {
         "filename": file.filename
     }

@@ -6,3 +6,7 @@ def make_dir(dir_name):
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     return save_dir
+
+
+def check_files(directory, pattern):
+    os.listdir(directory)
