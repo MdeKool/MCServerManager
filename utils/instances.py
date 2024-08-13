@@ -115,6 +115,7 @@ def create_instance(name, loader, version, modpack_id):
         os.makedirs("/home/servers/.temp/mods", exist_ok=True)
         mods_dir = os.path.expanduser("~/.temp/mods")
         fails = []
+        url_list = []
         with open(f"{mods_dir}/urls.txt", "w") as urls:
             for (mod_project_id, mod_file_id) in mods:
                 mod_dl_link_get = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}/download-url")
@@ -125,7 +126,8 @@ def create_instance(name, loader, version, modpack_id):
                     print(f"Failed to download: {mod_name} - {mod_link}")
                     fails.append((mod_name, mod_link))
                     continue
-                urls.write(mod_dl_link_get.json()["data"] + "\n")
+                url_list.append(mod_dl_link_get.json()["data"])
+            urls.writelines(url_list)
             subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} -i {mods_dir}/urls.txt", shell=True)
         return fails
 
