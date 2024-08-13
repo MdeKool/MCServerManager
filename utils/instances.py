@@ -121,6 +121,10 @@ def create_instance(name, loader, version, modpack_id):
                 mod_link = fail["links"]["websiteUrl"]
                 print(f"Failed to download: {mod_name} - {mod_link}")
                 fails.append((mod_name, mod_link))
+                continue
+            subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} {mod_dl_link_get}", shell=True)
+            if mod_dl_link_get.status_code == 200:
+                print(f"Successfully downloaded {mod_project_id} - {mod_file_id}")
 
         return fails
 
