@@ -142,3 +142,4 @@ def create_instance(name, loader, version, modpack_id):
 def make_dir(dir_name):
     if not os.path.isdir(dir_name):
         os.makedirs(dir_name)
+    return os.path.expanduser(dir_name)
