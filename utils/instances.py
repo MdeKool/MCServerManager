@@ -50,6 +50,8 @@ def stop_instance(instance):
 
 def create_instance(name, loader, version):
     shutil.copytree(f"/home/servers/Base/{loader}/{version}", f"/home/servers/Instances/{name}")
+    shutil.copytree("/home/servers/.temp/mods", f"/home/servers/Instances/{name}/mods")
+    shutil.copytree("/home/server/.temp/overrides", f"/home/servers/Instances/{name}")
 
 
 def get_loaders():
