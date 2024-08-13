@@ -137,11 +137,6 @@ def download_new_pack(modpack_id):
             os.remove(f"{mods_dir}/urls.txt")
         return fails
 
-    print("New pack name:", name)
-    print("New pack loader:", loader)
-    print("New pack version:", version)
-    print("New pack ID:", modpack_id)
-
     # API access
     base_url = "https://api.curseforge.com"
     auth = CustomAuth(API_KEY)
