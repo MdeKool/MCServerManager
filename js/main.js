@@ -222,10 +222,7 @@ function uploadFile(file) {
     fetch("/upload/",
         {
             method: "POST",
-            headers: {
-                "Content-Type": "application/zip"
-            },
-            data: file,
+            body: file,
         })
         .then(response => {
             if (!response.ok) {
