@@ -4,7 +4,10 @@ router = APIRouter(prefix="/upload")
 
 
 @router.post("/")
-async def file_upload(request: Request, file: UploadFile = File(...)):
-    print(request.form())
+async def file_upload(file: UploadFile = File(...)):
+    # print(request.form())
     contents = await file.read()
     print("Got a new file:", contents)
+    return {
+        "filename": file.filename
+    }
