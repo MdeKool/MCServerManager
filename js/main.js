@@ -137,26 +137,20 @@ function addButtonListeners(modalDoc, blur) {
 
     const createBtn = modalDoc.getElementById("new-instance-create");
     createBtn.addEventListener("click", () => {
-        const instanceName = document.getElementById("instance-name").value;
         const modpackId = document.getElementById("modpack-id").value;
-        const modloader = document.getElementById("modloader").value;
-        const version = document.getElementById("version").value;
 
         const container = document.getElementById("container");
         const btns = document.getElementsByClassName("new-instance-btns")[0];
         const loader = createLoader();
         container.insertBefore(loader, btns);
 
-        fetch("/servers/new",
+        fetch("/servers/download_pack",
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name: instanceName,
-                    loader: modloader,
-                    version: version,
                     modpack_id: modpackId
                 })
             })
@@ -230,7 +224,13 @@ function uploadFile(file) {
             }
             return response.json();
         })
-        .then(data => console.log("Uploaded form successfully"))
+        .then(data => {
+            if (!data["success"]) {
+                alert("There was a problem while uploading the files.");
+                return;
+            }
+            finaliseInstance();
+        })
         .catch(error => {
             console.error(`Error: ${error}`);
         });
@@ -240,4 +240,22 @@ function createLoader() {
     const loader = document.createElement("div");
     loader.className = "loader";
     return loader;
+}
+
+function finaliseInstance() {
+    const instanceName = document.getElementById("instance-name").value;
+    const modloader = document.getElementById("modloader").value;
+    const version = document.getElementById("version").value;
+
+    fetch("/servers/new",
+        {
+            method: "POST",
+            body: JSON.stringify({
+                instanceName: instanceName,
+                modloader: modloader,
+                version: version,
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log("Success"));
 }
