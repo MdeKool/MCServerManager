@@ -112,6 +112,7 @@ def create_instance(name, loader, version, modpack_id):
 
     def download_mods(mods):
         client = httpx.Client(auth=auth)
+        os.makedirs("/home/servers/.temp/mods")
         fails = []
         for (mod_project_id, mod_file_id) in mods:
             mod_dl_link_get = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}/download-url")
@@ -122,10 +123,8 @@ def create_instance(name, loader, version, modpack_id):
                 print(f"Failed to download: {mod_name} - {mod_link}")
                 fails.append((mod_name, mod_link))
                 continue
-            subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} {mod_dl_link_get}", shell=True)
-            if mod_dl_link_get.status_code == 200:
-                print(f"Successfully downloaded {mod_project_id} - {mod_file_id}")
-
+            print(mod_dl_link_get.text)
+            # if subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} {mod_dl_link_get.text}", shell=True)
         return fails
 
     print("New pack name:", name)
