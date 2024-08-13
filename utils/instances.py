@@ -49,7 +49,7 @@ def stop_instance(instance):
 
 
 def create_instance(name, loader, version):
-    shutil.copytree(f"~/Base/{loader}/{version}", f"~/Instances/{name}")
+    shutil.copytree(f"/home/servers/Base/{loader}/{version}", f"/home/servers/Instances/{name}")
 
 
 def get_loaders():
