@@ -53,7 +53,7 @@ def create_instance(name, loader, version):
     shutil.copytree(f"{home_dir}/Base/{loader}/{version}", f"{home_dir}/Instances/{name}", dirs_exist_ok=True)
     shutil.copytree(f"{home_dir}/.temp/mods", f"{home_dir}/Instances/{name}/mods", dirs_exist_ok=True)
     shutil.copytree(f"{home_dir}/.temp/overrides", f"{home_dir}/Instances/{name}", dirs_exist_ok=True)
-    os.removedirs(f"{home_dir}")
+    os.removedirs(f"{home_dir}/.temp")
 
 
 def get_loaders():
