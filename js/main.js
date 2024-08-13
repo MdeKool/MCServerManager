@@ -204,7 +204,7 @@ function uploadBox() {
     uploadInput.type = "file";
     uploadInput.id = "file-upload"
     uploadDiv.appendChild(uploadInput);
-    uploadInput.addEventListener("onchange", event => handleFileUpload("FILE CHANGED: " + event.target.value));
+    uploadInput.addEventListener("change", event => handleFileUpload("FILE CHANGED: " + event.target.value));
     return uploadDiv;
 }
 
