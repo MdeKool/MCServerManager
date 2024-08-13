@@ -206,7 +206,10 @@ function uploadBox() {
     uploadInput.id = "file-upload"
     uploadForm.appendChild(uploadInput);
     uploadDiv.appendChild(uploadForm);
-    uploadInput.addEventListener("change", event => uploadForm.submit());
+    uploadInput.addEventListener("change", event => {
+        event.preventDefault();
+        uploadForm.submit();
+    });
     uploadForm.addEventListener("submit", event => {
         const file = new FormData(uploadForm);
         handleFileUpload(file)
