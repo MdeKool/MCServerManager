@@ -112,7 +112,7 @@ def create_instance(name, loader, version, modpack_id):
 
     def download_mods(mods):
         client = httpx.Client(auth=auth)
-        os.makedirs("/home/servers/.temp/mods")
+        os.makedirs("/home/servers/.temp/mods", exist_ok=True)
         fails = []
         for (mod_project_id, mod_file_id) in mods:
             mod_dl_link_get = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}/download-url")
