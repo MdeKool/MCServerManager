@@ -49,10 +49,11 @@ def stop_instance(instance):
 
 
 def create_instance(name, loader, version):
-    shutil.copytree(f"~/Base/{loader}/{version}", f"~/Instances/{name}")
-    shutil.copytree("~/.temp/mods", f"~/Instances/{name}/mods")
-    shutil.copytree("~/.temp/overrides", f"~/Instances/{name}")
-    os.removedirs("~/.temp")
+    home_dir = "/home/servers"
+    shutil.copytree(f"{home_dir}/Base/{loader}/{version}", f"{home_dir}/Instances/{name}")
+    shutil.copytree(f"{home_dir}/.temp/mods", f"{home_dir}/Instances/{name}/mods")
+    shutil.copytree(f"{home_dir}/.temp/overrides", f"{home_dir}/Instances/{name}")
+    os.removedirs(f"{home_dir}")
 
 
 def get_loaders():
