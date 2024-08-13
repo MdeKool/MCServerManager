@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
 
 from routers import servers, modals, upload
-import util
+from utils import instances
 
 templates = Jinja2Templates(directory="templates")
 app = FastAPI()
@@ -30,8 +30,8 @@ async def root(request: Request):
 
 
 def list_servers():
-    instances = util.get_instances()
-    live_instances = util.get_live_instances()
+    all_instances = instances.get_instances()
+    live_instances = instances.get_live_instances()
     port_dict = {i[0]: i[1] for i in live_instances}
-    live_list = [(name, True, port_dict[name]) if name in port_dict else (name, False) for name in instances]
+    live_list = [(name, True, port_dict[name]) if name in port_dict else (name, False) for name in all_instances]
     return live_list

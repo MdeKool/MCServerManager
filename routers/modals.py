@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 
-import util
+from utils import instances
 
 templates = Jinja2Templates(directory="templates/modals")
 router = APIRouter(prefix="/modals")
@@ -11,5 +11,5 @@ router = APIRouter(prefix="/modals")
 async def new_instance(request: Request):
     return {
         "modal": templates.TemplateResponse("new_instance.html", {"request": request}).body.decode(),
-        "loaders": util.get_loaders()
+        "loaders": instances.get_loaders()
     }

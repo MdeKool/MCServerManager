@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 
-import util
+from utils import instances
 
 router = APIRouter(prefix="/servers")
 
@@ -9,19 +9,19 @@ router = APIRouter(prefix="/servers")
 async def server_on(request: Request):
     data = await request.json()
     instance = data.get("instance")
-    return util.start_instance(instance)
+    return instances.start_instance(instance)
 
 
 @router.post("/off")
 async def server_off(request: Request):
     data = await request.json()
     instance = data.get("instance")
-    return util.stop_instance(instance)
+    return instances.stop_instance(instance)
 
 
 @router.post("/new")
 async def server_new(request: Request):
     data = await request.json()
     return {
-        "remaining_mods": util.create_instance(**data)
+        "remaining_mods": instances.create_instance(**data)
     }
