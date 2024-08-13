@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, File, UploadFile
+from fastapi import APIRouter, Request, File, UploadFile, HTTPException
 
 from utils import files
 
@@ -11,7 +11,8 @@ async def file_upload(file: UploadFile = File(...)):
     contents = await file.read()
     with open(f"{dir_path}/{file.filename}", "wb") as f:
         f.write(contents)
-    files.check_zip_file(f"{dir_path}/{file.filename}", "^.*.jar")
+    if not files.check_zip_file(f"{dir_path}/{file.filename}", "^.*.jar"):
+        return HTTPException(400, "All files in zip must be *.jar files")
     return {
         "filename": file.filename
     }
