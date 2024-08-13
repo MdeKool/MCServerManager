@@ -123,8 +123,9 @@ def create_instance(name, loader, version, modpack_id):
                 print(f"Failed to download: {mod_name} - {mod_link}")
                 fails.append((mod_name, mod_link))
                 continue
-            print(mod_dl_link_get.text)
-            # if subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} {mod_dl_link_get.text}", shell=True)
+            mod_dl_link = mod_dl_link_get.json()["data"]
+            subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} {mod_dl_link}", shell=True)
+            print(f"Downloaded {mod_project_id} - {mod_file_id}")
         return fails
 
     print("New pack name:", name)
