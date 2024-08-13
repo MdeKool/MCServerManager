@@ -220,7 +220,7 @@ function uploadBox() {
 }
 
 function uploadFile(file) {
-    fetch("/upload",
+    fetch("/upload/",
         {
             method: "POST",
             headers: {
