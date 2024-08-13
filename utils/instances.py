@@ -129,6 +129,7 @@ def create_instance(name, loader, version, modpack_id):
                 url_list.append(mod_dl_link_get.json()["data"])
             urls.write("\n".join(url_list))
             subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} -i {mods_dir}/urls.txt", shell=True)
+            os.remove(f"{mods_dir}/urls.txt")
         return fails
 
     print("New pack name:", name)
