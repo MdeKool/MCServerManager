@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import subprocess
 from dotenv import load_dotenv
 
@@ -47,6 +48,10 @@ def stop_instance(instance):
     return {"status": "off"}
 
 
+def create_instance(name, loader, version):
+    shutil.copytree(f"~/Base/{loader}/{version}", f"~/Instances/{name}")
+
+
 def get_loaders():
     return {
         "fabric": [
@@ -82,7 +87,7 @@ def get_loaders():
     }
 
 
-def create_instance(name, loader, version, modpack_id):
+def download_new_pack(modpack_id):
     class CustomAuth(httpx.Auth):
         def __init__(self, token):
             self.token = token
