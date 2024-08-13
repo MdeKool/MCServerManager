@@ -1,13 +1,15 @@
 from fastapi import APIRouter, Request, File, UploadFile
 
+import util
+
 router = APIRouter(prefix="/upload")
 
 
 @router.post("/")
 async def file_upload(file: UploadFile = File(...)):
-    # print(request.form())
-    contents = await file.read()
-    print("Got a new file:", contents)
+    util.make_dir("~/.temp/missing_mods")
+    with file:
+        await file.write()
     return {
         "filename": file.filename
     }

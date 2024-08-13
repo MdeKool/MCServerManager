@@ -137,3 +137,7 @@ def create_instance(name, loader, version, modpack_id):
     mod_ids = get_mods_from_manifest()
     failed_downloads = download_mods(mod_ids)
     return failed_downloads
+
+
+def make_dir(dir_name):
+    return os.makedirs(f"~/{dir_name}")
