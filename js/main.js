@@ -225,7 +225,7 @@ function uploadFile(file) {
             headers: {
                 "Content-Type": "application/zip"
             },
-            body: file,
+            data: file,
         })
         .then(response => {
             if (!response.ok) {
