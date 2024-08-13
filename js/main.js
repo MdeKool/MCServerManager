@@ -251,8 +251,8 @@ function finaliseInstance() {
         {
             method: "POST",
             body: JSON.stringify({
-                instanceName: instanceName,
-                modloader: modloader,
+                name: instanceName,
+                loader: modloader,
                 version: version,
             })
         })
