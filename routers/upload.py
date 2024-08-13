@@ -7,10 +7,9 @@ router = APIRouter(prefix="/upload")
 
 @router.post("/")
 async def file_upload(file: UploadFile = File(...)):
-    dir_name = "~/.temp/missing_mods"
-    util.make_dir(dir_name)
+    dir_path = util.make_dir("~/.temp/missing_mods")
     contents = await file.read()
-    with open(f"{dir_name}/{file.filename}", "wb+") as f:
+    with open(f"{dir_path}/{file.filename}", "wb+") as f:
         f.write(contents)
     return {
         "filename": file.filename
