@@ -53,39 +53,10 @@ def create_instance(name, loader, version):
 
 
 def get_loaders():
-    fabric_versions = subprocess.run("pwd").stdout
-    print(fabric_versions)
     return {
-        "fabric": [
-            "1.21",
-            "1.20.6",
-            "1.20.5",
-            "1.20.4",
-            "1.20.3",
-            "1.20.2",
-            "1.20.1",
-            "1.20",
-            "1.18.2",
-            "1.16.5",
-            "1.12.2",
-            "1.7.10"
-        ],
-        "forge": [
-            "1.21",
-            "1.20.2",
-            "1.20.1"
-        ],
-        "neo": [
-            "1.21",
-            "1.20.6",
-            "1.20.5",
-            "1.20.4",
-            "1.20.3",
-            "1.20.2",
-            "1.20.1",
-            "1.20",
-            "1.12.2"
-        ]
+        "fabric": [subprocess.run("find ~/Base/fabric -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]],
+        "forge": [subprocess.run("find ~/Base/forge -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]],
+        "neo": [subprocess.run("find ~/Base/neo -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]]
     }
 
 
