@@ -19,5 +19,5 @@ async def file_upload(file: UploadFile = File(...)):
     os.remove(f"{dir_path}/{file.filename}")
     instances.fill_missing(".temp/")
     return {
-        "filename": file.filename
+        "success": True,
     }
