@@ -53,10 +53,11 @@ def create_instance(name, loader, version):
 
 
 def get_loaders():
+    base_dir = os.path.expanduser("~/Base")
     return {
-        "fabric": [subprocess.run("find ~/Base/fabric -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]],
-        "forge": [subprocess.run("find ~/Base/forge -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]],
-        "neo": [subprocess.run("find ~/Base/neo -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]]
+        "fabric": subprocess.run("find " + base_dir + "/fabric -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1],
+        "forge": subprocess.run("find " + base_dir + "/forge -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1],
+        "neo": subprocess.run("find " + base_dir + "/neo -mindepth 1 -maxdepth 1 -type d | awk -F/ '{print $NF}'").stdout.decode().split("\n")[:-1]
     }
 
 
