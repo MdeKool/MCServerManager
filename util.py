@@ -140,4 +140,4 @@ def create_instance(name, loader, version, modpack_id):
 
 
 def make_dir(dir_name):
-    return os.makedirs(f"~/{dir_name}")
+    return os.makedirs(dir_name)
