@@ -22,6 +22,11 @@ async def server_off(request: Request):
 @router.post("/new")
 async def server_new(request: Request):
     data = await request.json()
+    instances.create_instance(**data)
+
+@router.post("/download_pack")
+async def download_pack(request: Request):
+    data = await request.json()
     return {
-        "remaining_mods": instances.create_instance(**data)
+        "remaining_mods": instances.download_new_pack(**data)
     }
