@@ -113,19 +113,20 @@ def create_instance(name, loader, version, modpack_id):
     def download_mods(mods):
         client = httpx.Client(auth=auth)
         os.makedirs("/home/servers/.temp/mods", exist_ok=True)
+        mods_dir = os.path.expanduser("~/.temp/mods")
         fails = []
-        for (mod_project_id, mod_file_id) in mods:
-            mod_dl_link_get = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}/download-url")
-            if mod_dl_link_get.status_code != 200:
-                fail = client.get(base_url + f"/v1/mods/{mod_project_id}").json()["data"]
-                mod_name = fail["name"]
-                mod_link = fail["links"]["websiteUrl"]
-                print(f"Failed to download: {mod_name} - {mod_link}")
-                fails.append((mod_name, mod_link))
-                continue
-            mod_dl_link = mod_dl_link_get.json()["data"]
-            subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} {mod_dl_link}", shell=True)
-            print(f"Downloaded {mod_project_id} - {mod_file_id}")
+        with open(f"{mods_dir}/urls.txt", "w") as urls:
+            for (mod_project_id, mod_file_id) in mods:
+                mod_dl_link_get = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}/download-url")
+                if mod_dl_link_get.status_code != 200:
+                    fail = client.get(base_url + f"/v1/mods/{mod_project_id}").json()["data"]
+                    mod_name = fail["name"]
+                    mod_link = fail["links"]["websiteUrl"]
+                    print(f"Failed to download: {mod_name} - {mod_link}")
+                    fails.append((mod_name, mod_link))
+                    continue
+                urls.write(mod_dl_link_get.json()["data"])
+            subprocess.run(f"cd ~/.temp/mods && wget --header=x-api-key: {auth.token} -i {mods_dir}/urls.txt", shell=True)
         return fails
 
     print("New pack name:", name)
