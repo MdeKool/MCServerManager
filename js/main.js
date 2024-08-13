@@ -204,9 +204,12 @@ function uploadBox() {
     const uploadInput = document.createElement("input");
     uploadInput.type = "file";
     uploadInput.id = "file-upload"
+    uploadInput.accept = ".zip"
     uploadForm.appendChild(uploadInput);
     uploadDiv.appendChild(uploadForm);
     uploadInput.addEventListener("change", event => {
+        const file = new FormData();
+        file.append('file', uploadInput.files[0])
         uploadFile(new FormData(uploadForm));
     });
     return uploadDiv;
