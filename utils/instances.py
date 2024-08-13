@@ -53,6 +53,8 @@ def create_instance(name, loader, version):
 
 
 def get_loaders():
+    fabric_versions = subprocess.run("pwd").stdout
+    print(fabric_versions)
     return {
         "fabric": [
             "1.21",
