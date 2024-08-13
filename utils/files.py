@@ -1,4 +1,6 @@
 import os
+from zipfile import ZipFile
+
 
 def make_dir(dir_name):
     base_dir = "/home/servers/"
@@ -8,5 +10,5 @@ def make_dir(dir_name):
     return save_dir
 
 
-def check_files(directory, pattern):
-    print(os.listdir(directory))
+def check_zip_file(file_location, pattern):
+    print(ZipFile(file_location).namelist())
