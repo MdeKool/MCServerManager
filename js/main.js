@@ -210,7 +210,7 @@ function uploadBox() {
     uploadInput.addEventListener("change", event => {
         const file = new FormData();
         file.append('file', uploadInput.files[0])
-        uploadFile(new FormData(uploadForm));
+        uploadFile(file);
     });
     return uploadDiv;
 }
