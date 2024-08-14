@@ -258,5 +258,11 @@ function finaliseInstance() {
             })
         })
         .then(response => response.json())
-        .then(data => console.log("Success"));
+        .then(data => {
+            if (!data["success"]) {
+                console.error("Something went wrong finalising server");
+                return;
+            }
+            location.reload();
+        });
 }
