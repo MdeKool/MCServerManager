@@ -185,7 +185,7 @@ function failedDownloadList(failList) {
         const modFile = mod[2]
         const modDiv = document.createElement("div");
         modDiv.className = "failed-mod"
-        modDiv.innerHTML = `${modName} - filename: ${modFile} - <a href="${modLink}" target='_blank'>Link</a>`;
+        modDiv.innerHTML = `${modName} - filename: <b>${modFile}</b> - <a href="${modLink}" target='_blank'>Link</a>`;
         modList.appendChild(modDiv);
     });
     return modList;
