@@ -106,8 +106,10 @@ def download_new_pack(modpack_id):
                     fail = client.get(base_url + f"/v1/mods/{mod_project_id}").json()["data"]
                     mod_name = fail["name"]
                     mod_link = fail["links"]["websiteUrl"]
-                    print(f"Failed to download: {mod_name} - {mod_link}")
-                    fails.append((mod_name, mod_link))
+                    fail_details = client.get(base_url + f"/v1/mods/{mod_project_id}/files/{mod_file_id}").json()["data"]
+                    mod_version = fail_details["fileName"]
+                    print(f"Failed to download: {mod_name} - {mod_link} - file: {mod_version}")
+                    fails.append((mod_name, mod_link, mod_version))
                     continue
                 url_list.append(mod_dl_link_get.json()["data"])
             urls.write("\n".join(url_list))
