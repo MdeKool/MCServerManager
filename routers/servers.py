@@ -23,6 +23,9 @@ async def server_off(request: Request):
 async def server_new(request: Request):
     data = await request.json()
     instances.create_instance(**data)
+    return {
+        "success": True
+    }
 
 @router.post("/download_pack")
 async def download_pack(request: Request):
